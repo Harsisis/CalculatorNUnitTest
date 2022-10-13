@@ -95,6 +95,7 @@ namespace CalculatorUnitTests {
             }
 
             [TestCase("1,-1", -1)]
+            [TestCase("1,-3", -3)]
             [Test]
             public void AddThrowArgumentExceptionWhenSuppliedStringDoesNotMeetRule(string numbers, int beyondRuleNumber) {
                 var exception = Assert.Throws<ArgumentException>(() => Calculator.Add(numbers));
