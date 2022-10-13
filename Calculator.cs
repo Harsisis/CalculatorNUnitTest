@@ -18,9 +18,6 @@ namespace CalculatorUnitTests {
         private static void AddNumberToSumIfPossible(ref int sum, string numberString) {
             int currentResult;
             if (CheckIfNumberIsValid(out currentResult, numberString)) {
-                if (currentResult < 0) {
-                    throw new ArgumentException(GetIsNegativeExceptionMessage(currentResult));
-                }
                 sum += currentResult;
             }
         }
@@ -30,7 +27,11 @@ namespace CalculatorUnitTests {
         }
 
         private static bool CheckIfNumberIsValid(out int currentResult, string numberString) {
-            return Int32.TryParse(numberString, out currentResult) && currentResult <= 1000;
+            bool isNumberInteger = Int32.TryParse(numberString, out currentResult);
+            if (currentResult < 0) {
+                throw new ArgumentException(GetIsNegativeExceptionMessage(currentResult));
+            }
+            return isNumberInteger && currentResult <= 1000;
         }
     }
 }
